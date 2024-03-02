@@ -32,24 +32,18 @@ export const Actions = ({
   const blockClickHanlder = async () => {
     if (isBlocking) {
       const unblock = await UnBlock(userId);
-      toast.success(`UnBlocked ${unblock.blocking.username}`);
+      toast.success(`UnBlocked ${unblock?.blocking.username}`);
     } else {
       const block = await Block(userId);
-      toast.success(`Blocked ${block.blocking.username}`);
+      toast.success(`Blocked ${block?.blocking.username}`);
     }
   };
   return (
     <div className="flex gap-2">
-      <Button
-        variant={"customButton"}
-        onClick={followClickHanlder}
-      >
+      <Button variant={"customButton"} onClick={followClickHanlder}>
         {label}
       </Button>
-      <Button
-        variant={"customButton"}
-        onClick={blockClickHanlder}
-      >
+      <Button variant={"customButton"} onClick={blockClickHanlder}>
         {blockLabel}
       </Button>
     </div>
