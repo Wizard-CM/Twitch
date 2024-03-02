@@ -1,0 +1,92 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// @unique : Allows you to filter data using "where" keyword
+// @unique by just using this keyword , we cannot use the" findUnique method"
+
+model User {
+  id             String  @id @default(uuid())
+  username       String  @unique
+  imageUrl       String  @db.Text
+  email          String
+  bio            String?
+  externalUserId String  @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  Follower  Follow[] @relation(name: "follower")
+  Following Follow[] @relation(name: "following")
+  // Follower : Maile follow gareko user haru
+  // Following : Malai follow gareko user haru
+
+  blocker  Block[] @relation(name: "blocker")
+  Blocking Block[] @relation(name: "blocking")
+  // blocker : Malai Block Gareko User Haru
+  // blocking : Maile Block Gareko User Haru
+
+  stream Stream?
+}
+
+model Follow {
+  id          String @id @default(uuid())
+  followerId  String @unique
+  followingId String @unique
+
+  follower  User @relation(name: "follower", fields: [followerId], references: [id], onDelete: Cascade)
+  following User @relation(name: "following", fields: [followingId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Ram leh shyam lai follow garyo.
+
+  // followingId : Jasle follow gareko cha   || Ram
+  // followerId  : Jaslai follow gareko cha. || shyam
+}
+
+model Block {
+  id         String @id @default(uuid())
+  blockerId  String @unique
+  blockingId String @unique
+
+  blocker  User @relation(name: "blocker", fields: [blockerId], references: [id], onDelete: Cascade)
+  blocking User @relation(name: "blocking", fields: [blockingId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Ram leh shyam lai block garyo.
+
+  // blockerId : Jasle block gareko cha   || Ram
+  // blockingId  : Jaslai block gareko cha. || shyam
+}
+
+model Stream {
+  id           String  @id @default(uuid())
+  name         String  @db.Text
+  thumbnailUrl String? @db.Text
+
+  ingressId String? @unique
+  serverUrl String? @db.Text
+  streamKey String? @db.Text
+
+  isLive              Boolean @default(false)
+  isChatEnabled       Boolean @default(true)
+  isChatDelayed       Boolean @default(false)
+  isChatFollowersOnly Boolean @default(false)
+
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
