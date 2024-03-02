@@ -29,7 +29,7 @@ export const RecommendedUsers = ({ data }: RecommendedUsersProps) => {
             Recommended
           </p>
           {data.length > 0 &&
-            data.map((i,ind) => {
+            data.map((i, ind) => {
               return <UserItem key={ind} user={i} isLive={i.stream?.isLive} />;
             })}
         </>
@@ -51,7 +51,7 @@ export const RecommendedUsersSkeleton = () => {
       />
 
       {[...Array(3)].map((i) => (
-        <UserItemSkeleton />
+        <UserItemSkeleton key={i} />
       ))}
     </>
   );

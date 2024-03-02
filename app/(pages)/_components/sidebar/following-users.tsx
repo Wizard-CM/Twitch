@@ -6,12 +6,13 @@ import React from "react";
 import { UserItem, UserItemSkeleton } from "./user-item";
 import { Skeleton } from "@/components/ui/skeleton";
 interface FollowingUsersProps {
-  data: (Follow & { follower: {stream: { isLive: boolean } | null} & User  })[];
+  data: (Follow & {
+    follower: { stream: { isLive: boolean } | null } & User;
+  })[];
 }
 
 export const FollowingUser = ({ data }: FollowingUsersProps) => {
   const { collaspe } = useSidebarState((state) => state);
-
 
   return (
     <>
@@ -26,8 +27,14 @@ export const FollowingUser = ({ data }: FollowingUsersProps) => {
             Following
           </p>
           {data.length > 0 &&
-            data.map((i,index) => {
-              return <UserItem key={index} user={i.follower} isLive={i.follower.stream?.isLive} />;
+            data.map((i, index) => {
+              return (
+                <UserItem
+                  key={index}
+                  user={i.follower}
+                  isLive={i.follower.stream?.isLive}
+                />
+              );
             })}
         </>
       )}
@@ -44,7 +51,7 @@ export const FollowingUsersSkeleton = () => {
       />
 
       {[...Array(3)].map((i) => (
-        <UserItemSkeleton />
+        <UserItemSkeleton key={i} />
       ))}
     </>
   );
