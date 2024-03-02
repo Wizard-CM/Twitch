@@ -34,8 +34,8 @@ export const Navigation = () => {
   ];
   return (
     <div className="px-3 w-full mt-2">
-      {routes.map((i) => (
-        <NavItem label={i.label} icon={i.icon} href={i.href} isActive={i.href == path} />
+      {routes.map((i,index) => (
+        <NavItem key={index} label={i.label} icon={i.icon} href={i.href} isActive={i.href == path} />
       ))}
     </div>
   );

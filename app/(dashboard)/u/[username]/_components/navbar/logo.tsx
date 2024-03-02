@@ -22,7 +22,7 @@ export const Logo = () => {
       </div>
       <div className={cn(font.style)}>
         <h3 className="font-bold text-xl">GameHub</h3>
-        <p className="text-sm text-muted-foreground">Creator's Dashboard</p>
+        <p className="text-sm text-muted-foreground">Creator&apos;s Dashboard</p>
       </div>
     </Link>
   );

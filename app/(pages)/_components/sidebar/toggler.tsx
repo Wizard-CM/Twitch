@@ -16,7 +16,7 @@ const Toggle = () => {
         collaspe && "lg:justify-center"
       )}
     >
-      <p className={cn("text-md hidden", !collaspe && "lg:block")}>Let's See</p>
+      <p className={cn("text-md hidden", !collaspe && "lg:block")}>Let&apos;s See</p>
 
       {collaspe ? (
         <ToolTip label="Expand" side={Sides.Right}>

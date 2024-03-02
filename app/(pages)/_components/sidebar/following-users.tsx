@@ -26,8 +26,8 @@ export const FollowingUser = ({ data }: FollowingUsersProps) => {
             Following
           </p>
           {data.length > 0 &&
-            data.map((i) => {
-              return <UserItem user={i.follower} isLive={i.follower.stream?.isLive} />;
+            data.map((i,index) => {
+              return <UserItem key={index} user={i.follower} isLive={i.follower.stream?.isLive} />;
             })}
         </>
       )}

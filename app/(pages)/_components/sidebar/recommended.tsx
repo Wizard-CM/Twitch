@@ -29,8 +29,8 @@ export const RecommendedUsers = ({ data }: RecommendedUsersProps) => {
             Recommended
           </p>
           {data.length > 0 &&
-            data.map((i) => {
-              return <UserItem user={i} isLive={i.stream?.isLive} />;
+            data.map((i,ind) => {
+              return <UserItem key={ind} user={i} isLive={i.stream?.isLive} />;
             })}
         </>
       )}
