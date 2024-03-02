@@ -9,7 +9,6 @@ import {
 } from "@livekit/components-react";
 import { ConnectionState } from "livekit-client";
 import { ChatForm, ChatFormSkeleton } from "./chat-form";
-import { Skeleton } from "../ui/skeleton";
 import ChatList, { ChatListSkeleton } from "./chat-list";
 import { ChatCommunity } from "./chat-community";
 
@@ -55,7 +54,8 @@ export const Chat = ({
     } else {
       onExpand();
     }
-  }, [matches, onExpand]);
+  }, [matches, onExpand,onCollaspe
+  ]);
 
   // Submit Handlers
   const onSubmit = () => {
